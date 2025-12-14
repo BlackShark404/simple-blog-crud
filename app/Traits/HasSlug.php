@@ -19,13 +19,8 @@ trait HasSlug
         $slug = Str::slug($title);
         $original = $slug;
 
-        $count = static::where('slug', 'LIKE', "original%")->count();
+        $count = static::where('slug', 'LIKE', "{$original}%")->count();
 
-        if ($count > 0)
-        {
-            $slug = "{$original}-{$count}";
-        }
-
-        return $slug;
+        return $count? "{$original}-{$count}" : $slug;
     }
 }
