@@ -12,7 +12,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Post::class);
+        return true;
     }
 
     /**
