@@ -12,6 +12,24 @@ class PostController extends Controller
 {   
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::latest()->paginate(10);
+
+        return view('posts.index', compact('posts'));
+    }
+
+    public function store(StorePostRequest $request)
+    {
+        $data = $request->validated();
+
+        $post = Post::create($data);
+
+        return redirect()->route('posts.index')->with('success', 'Post Created successfully');
+    }
+
+    public function update(UpdatePostRequest $request)
+    {
+        $data = $request->validated();
+
+        
     }
 }
